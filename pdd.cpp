@@ -1,17 +1,46 @@
 #include <iostream>
 #include "LinkedList.h"
+using namespace std;
 
-/**
- * manages the running of the program, initialises data structures, loads
- * data, display the main menu, and handles the processing of options. 
- * Make sure free memory and close all files before exiting the program.
- **/
 int main(int argc, char **argv)
 {
-    /* validate command line arguments */
-    // TODO
+    cout << "Main Menu: " << endl;
+    cout << "\t1.Display Items" << endl;
+    cout << "\t2.Purchase Items" << endl;
+    cout << "\t3.Save and Exit" << endl;
+    cout << "Adminstrator-Only Menu:" << endl;
+    cout << "\t4.Add Item" << endl;
+    cout << "\t5.Remove Item" << endl;
+    cout << "\t6.Display Coins" << endl;
+    cout << "\t7.Reset Stock" << endl;
+    cout << "\t8.Reset Coins" << endl;
+    cout << "\t9. Abort Program" << endl;
+    cout << "Select your option (1-9): ";
 
-    std::cout << "Just a test, nothing implemented yet!" << std::endl;
+    int option;
+    switch (option)
+    {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+    case 7:
+        break;
+    case 8:
+        break;
+    case 9:
+        break;
+    default:
+        break;
+    }
     
     return EXIT_SUCCESS;
 }
