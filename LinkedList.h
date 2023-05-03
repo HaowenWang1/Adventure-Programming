@@ -10,7 +10,7 @@ public:
     ~LinkedList();
 
     // more functions to be added perhaps...
-
+    void addBack(Stock data);
 private:
     // the beginning of the list
     Node* head;
