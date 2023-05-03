@@ -11,6 +11,10 @@ public:
 
     // more functions to be added perhaps...
     void addBack(Stock data);
+
+    // Node get(int index);
+
+    int size();
 private:
     // the beginning of the list
     Node* head;
