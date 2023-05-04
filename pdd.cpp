@@ -1,6 +1,48 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
 #include "LinkedList.h"
 using namespace std;
+
+vector<Stock> loadStocks(string filename)
+{
+    vector<Stock> items;
+    ifstream inputfile(filename);
+
+    if(inputfile)
+    {
+        string line;
+        while(getline(inputfile, line))
+        {
+            Stock item;
+            stringstream ss(line);
+            string token;
+            
+            getline(ss, token, '|');
+            item.id = token;
+            getline(ss, token, '|');
+            item.name = token;
+            getline(ss, token, '|');
+            item.description = token;
+            getline(ss, token, '|');
+            double price = stod(token);
+            item.price.dollars = static_cast<unsigned int>(price);
+            item.price.cents = static_cast<unsigned int>((price - item.price.dollars) * 100);
+            getline(ss, token);
+            item.on_hand = stoi(token);
+
+            items.push_back(item);
+        }
+    }
+    else
+    {
+        std::cout << "Failed to open file:" << filename << endl;
+    }
+
+    return items;
+}
 
 int main(int argc, char **argv)
 {
@@ -16,6 +58,18 @@ int main(int argc, char **argv)
     cout << "\t8.Reset Coins" << endl;
     cout << "\t9. Abort Program" << endl;
     cout << "Select your option (1-9): ";
+
+    vector<Stock> items = loadStocks("stock.dat");
+
+    for (Stock item : items)
+    {
+        cout << "ID: " << item.id << endl;
+        cout << "Name: " << item.name << endl;
+        cout << "Description: " << item.description << endl;
+        cout << "Price: $" << item.price.dollars << "." << item.price.cents << endl;
+        cout << "Number on Hand: " << item.on_hand << endl;
+        cout << endl;
+    }
 
     int option;
     switch (option)
