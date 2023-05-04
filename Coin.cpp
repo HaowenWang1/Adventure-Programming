@@ -2,9 +2,10 @@
 #include <string>
  
  // implement functions for managing coins; this may depend on your design.
-void Coin:: ReduceCoin(char type){
-    if(this->denom == type)
-    {
-        this->count = this->count - 1;
-    }
+void Coin::ReduceCoin(){
+    this->count = this->count - 1;
+}
+
+void Coin::AddCoin(){
+    this->count = this->count + 1;
 }
