@@ -19,7 +19,9 @@ class Coin
 {
 public:
 
-    void ReduceCoin(char type);
+    void ReduceCoin();
+
+    void AddCoin();
     // the denomination type
     enum Denomination denom;
     
