@@ -108,10 +108,19 @@ vector<Coin> loadCoin(string filename)
 
 void Option_1()
 {
-    
+
 }
 int main(int argc, char **argv)
 {
+    vector<Stock> items = loadStocks("stock.dat");
+    LinkedList stockList;
+
+    for (Stock item : items)
+    {
+        stockList.addBack(item);
+    }
+    
+    vector<Coin> coins = loadCoin("coins.dat");
     cout << "Main Menu: " << endl;
     cout << "\t1.Display Items" << endl;
     cout << "\t2.Purchase Items" << endl;
@@ -163,6 +172,7 @@ int main(int argc, char **argv)
     default:
         break;
     }
+    
     
     return EXIT_SUCCESS;
 }
