@@ -106,9 +106,9 @@ vector<Coin> loadCoin(string filename)
     return items;
 }
 
-void Option_1()
+void Option_1(LinkedList stockList)
 {
-
+    stockList.PrintItems();
 }
 int main(int argc, char **argv)
 {
@@ -140,7 +140,7 @@ int main(int argc, char **argv)
         cin >> option;
         if(option == 1)
         {
-            stockList.PrintItems();
+            Option_1(stockList);
         }
         else if(option == 2)
         {
