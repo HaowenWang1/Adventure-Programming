@@ -44,6 +44,67 @@ vector<Stock> loadStocks(string filename)
     return items;
 }
 
+vector<Coin> loadCoin(string filename)
+{
+    vector<Coin> items;
+    ifstream inputfile(filename);
+
+    if(inputfile)
+    {
+        string line;
+        while(getline(inputfile, line))
+        {
+            Coin item;
+            int price;
+            stringstream ss(line);
+            string token;
+
+            getline(ss, token, ',');
+            price = stod(token);
+            if(price == 1000)
+            {
+                item.denom = TEN_DOLLARS;
+            }
+            else if(price == 500)
+            {
+                item.denom = FIVE_DOLLARS;
+            }
+            else if(price == 200)
+            {
+                item.denom = TWO_DOLLARS;
+            }
+            else if(price == 100)
+            {
+                item.denom = ONE_DOLLAR;
+            }
+            else if(price == 50)
+            {
+                item.denom = FIFTY_CENTS;
+            }
+            else if(price == 20)
+            {
+                item.denom = TWENTY_CENTS;
+            }
+            else if(price == 10)
+            {
+                item.denom = TEN_CENTS;
+            }
+            else if(price == 5)
+            {
+                item.denom = FIVE_CENTS;
+            }
+            getline(ss,token);
+            item.count = stoi(token);
+
+            items.push_back(item);
+        }
+    }
+    else
+    {
+        std::cout << "Failed to open file:" << filename << endl;
+    }
+    return items;
+}
 int main(int argc, char **argv)
 {
     cout << "Main Menu: " << endl;
@@ -60,15 +121,20 @@ int main(int argc, char **argv)
     cout << "Select your option (1-9): ";
 
     vector<Stock> items = loadStocks("stock.dat");
+    vector<Coin> coins = loadCoin("coins.dat");
 
     for (Stock item : items)
     {
-        cout << "ID: " << item.id << endl;
-        cout << "Name: " << item.name << endl;
-        cout << "Description: " << item.description << endl;
-        cout << "Price: $" << item.price.dollars << "." << item.price.cents << endl;
+        cout << "ID: " << item.id << "|";
+        cout << "Name: " << item.name << "|";
+        cout << "Description: " << item.description << "|";
+        cout << "Price: $" << item.price.dollars << "." << item.price.cents << "|";
         cout << "Number on Hand: " << item.on_hand << endl;
-        cout << endl;
+        
+    }
+    for (Coin item : coins)
+    {
+        item.Display();
     }
 
     int option;
