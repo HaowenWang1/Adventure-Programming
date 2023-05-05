@@ -1,21 +1,31 @@
 #include "LinkedList.h"
+#include <iostream>
+#include <iomanip>
+using namespace std;
 
 
 LinkedList::LinkedList() {
    head = nullptr;
-
+    count = 0;
    // TODO
 }
 
 LinkedList::~LinkedList() {
     // TODO
-    delete this->head;
+    Node* current = head;
+    while(current != nullptr)
+    {
+        Node* to_delete = current;
+        current = current->next;
+        delete to_delete;
+    }
     
 }
 
 void LinkedList::addBack(Stock data)
 {
-    Node* newNode = new Node(data, nullptr);
+    Stock* newData = new Stock(data);
+    Node* newNode = new Node(newData, nullptr);
     if (head == nullptr)
     {
         head = newNode;
@@ -29,16 +39,32 @@ void LinkedList::addBack(Stock data)
         }
         current->next = newNode;
     }
+    count++;
+}
+
+void LinkedList::PrintItems()
+{
+    const int idWidth = 5;
+    const int nameWidth = 40;
+    const int availavleWidth = 11;
+    const int priceWidth = 0;
+    cout << "Items Menu" << endl;
+    cout << "----------" << endl;
+    cout << "ID   |Name                                    | Available | Price" << endl;
+    cout << "------------------------------------------------------------" << endl;
+    Node* current = head;
+    while (current != nullptr) {
+        cout << setw(idWidth) << left << current->data->id << "|";
+        cout << setw(nameWidth) << left << current->data->name << "|";
+        cout << setw(availavleWidth) << left << current->data->on_hand << "|";
+        cout << setw(priceWidth) << left << current->data->price.dollars << "." << fixed << setprecision(2) << current->data->price.cents << endl;
+
+        current = current->next;
+    }
 }
 
 int LinkedList::size() {
-    int count = 0;
-    Node* current = head;
-    while (current != nullptr)
-    {
-        ++count;
-        current = current->next;
-    }
+   
     return count;
 }
 

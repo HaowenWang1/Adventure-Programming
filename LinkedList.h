@@ -15,6 +15,8 @@ public:
     // Node get(int index);
 
     int size();
+
+    void PrintItems();
 private:
     // the beginning of the list
     Node* head;
