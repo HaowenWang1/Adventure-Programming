@@ -105,6 +105,11 @@ vector<Coin> loadCoin(string filename)
     }
     return items;
 }
+
+void Option_1()
+{
+    
+}
 int main(int argc, char **argv)
 {
     cout << "Main Menu: " << endl;
@@ -121,17 +126,14 @@ int main(int argc, char **argv)
     cout << "Select your option (1-9): ";
 
     vector<Stock> items = loadStocks("stock.dat");
-    vector<Coin> coins = loadCoin("coins.dat");
+    LinkedList stockList;
 
     for (Stock item : items)
     {
-        cout << "ID: " << item.id << "|";
-        cout << "Name: " << item.name << "|";
-        cout << "Description: " << item.description << "|";
-        cout << "Price: $" << item.price.dollars << "." << item.price.cents << "|";
-        cout << "Number on Hand: " << item.on_hand << endl;
-        
+        stockList.addBack(item);
     }
+    stockList.PrintItems();
+    vector<Coin> coins = loadCoin("coins.dat");
     for (Coin item : coins)
     {
         item.Display();

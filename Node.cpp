@@ -1,8 +1,8 @@
 #include "Node.h"
 
-Node::Node(Stock data, Node* next){
+Node::Node(Stock* data, Node* next){
     // TODO
-    *this->data = data;
+    this->data = data;
     this->next= next;
 };
 Node::~Node(){
