@@ -12,8 +12,14 @@ void Coin::AddCoin(){
     this->count = this->count + 1;
 }
 
+int Coin::LoadOne()
+{
+    return 0;
+}
+
 void Coin::Display()
 {
+    
     if(this->denom == TEN_DOLLARS)
     {
         cout << 1000 << ":" << this->count << endl;

@@ -106,9 +106,9 @@ vector<Coin> loadCoin(string filename)
     return items;
 }
 
-void Option_1()
+void Option_1(LinkedList stockList)
 {
-
+    stockList.PrintItems();
 }
 int main(int argc, char **argv)
 {
@@ -131,46 +131,65 @@ int main(int argc, char **argv)
     cout << "\t6.Display Coins" << endl;
     cout << "\t7.Reset Stock" << endl;
     cout << "\t8.Reset Coins" << endl;
-    cout << "\t9.Abort Program" << endl;
-    cout << "Select your option (1-9): ";
-
-    vector<Stock> items = loadStocks("stock.dat");
-    LinkedList stockList;
-
-    for (Stock item : items)
-    {
-        stockList.addBack(item);
-    }
-    stockList.PrintItems();
-    vector<Coin> coins = loadCoin("coins.dat");
-    for (Coin item : coins)
-    {
-        item.Display();
-    }
-
-    int option;
-    switch (option)
-    {
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    case 5:
-        break;
-    case 6:
-        break;
-    case 7:
-        break;
-    case 8:
-        break;
-    case 9:
-        break;
-    default:
-        break;
+    cout << "\t9. Abort Program" << endl;
+    
+    int option = 0;
+    while( option != 10)
+    {   
+        cout << "Select your option (1-9): ";
+        cin >> option;
+        if(option == 1)
+        {
+            Option_1(stockList);
+        }
+        else if(option == 2)
+        {
+            cout << "option2" << endl;
+        }
+        else if(option == 3)
+        {
+            cout << "option3" << endl;
+        }
+        else if(option == 4)
+        {
+            cout << "option4" << endl;
+        }
+        else if(option == 5)
+        {
+            cout << "option5" << endl;
+        }
+        else if(option == 6)
+        {
+            for (Coin item : coins)
+            {
+            item.Display();
+            }
+        }
+        else if(option == 7)
+        {
+            cout << "option7" << endl;
+        }
+        else if(option == 8)
+        {
+            cout << "option8" << endl;
+        }
+        else if(option == 9)
+        {
+            cout << "option9" << endl;
+        }
+        else if(option == 10)
+        {
+            cout << "bye" << endl;
+        }
+        else
+        {
+            std::cin.clear();
+            std::cin.ignore();
+            std::cout << std::endl;
+            std::cout << "Please enter 1~9"<< std::endl;
+            std::cout << std::endl;
+            option = 0;
+        }
     }
     
     
