@@ -115,7 +115,10 @@ void Option_1(LinkedList stockList)
 
 void Option_6(vector<Coin> coins)
 {
-    
+    cout << "Coins Summary" << endl;
+    cout << "-------------" << endl;
+    cout << "Denomination    |    Count" << endl;
+    cout << "----------------------------" << endl;
     for (Coin item : coins)
         {
             item.Display();

@@ -20,8 +20,8 @@ int Coin::LoadOne()
 
 void Coin::Display()
 {
-    const int denomination = 15;
-    const int Count = 10;
+    const int denomination = 16;
+    const int Count = 11;
     const char separator = '|';
     if(this->denom == TEN_DOLLARS)
     {
