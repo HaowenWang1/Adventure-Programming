@@ -22,6 +22,8 @@ public:
     void ReduceCoin();
 
     void AddCoin();
+
+    void Display();
     // the denomination type
     enum Denomination denom;
     
