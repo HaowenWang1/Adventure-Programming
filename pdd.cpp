@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <iomanip>
 #include "LinkedList.h"
 using namespace std;
 
@@ -96,7 +97,8 @@ vector<Coin> loadCoin(string filename)
             getline(ss,token);
             item.count = stoi(token);
 
-            items.push_back(item);
+            items.insert(items.begin(), item);
+            // items.push_back(item);
         }
     }
     else
@@ -109,6 +111,15 @@ vector<Coin> loadCoin(string filename)
 void Option_1(LinkedList stockList)
 {
     stockList.PrintItems();
+}
+
+void Option_6(vector<Coin> coins)
+{
+    
+    for (Coin item : coins)
+        {
+            item.Display();
+        }
 }
 int main(int argc, char **argv)
 {
@@ -160,10 +171,11 @@ int main(int argc, char **argv)
         }
         else if(option == 6)
         {
-            for (Coin item : coins)
-            {
-            item.Display();
-            }
+            Option_6(coins);
+            // for (Coin item : coins)
+            // {
+            // item.Display();
+            // }
         }
         else if(option == 7)
         {
