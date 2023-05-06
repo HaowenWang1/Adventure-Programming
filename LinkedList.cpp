@@ -75,7 +75,7 @@ Node* LinkedList::get(string ID)
     Node* returnNode = nullptr;
     while (current != nullptr)
     {
-        if(ID == current->data->id)
+        if(ID == current->data->id && current->data->on_hand > 0)
         {
             returnNode = current;
         }
