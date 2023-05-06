@@ -15,7 +15,42 @@ void Coin::AddCoin(){
 
 int Coin::LoadOne()
 {
-    return 0;
+    if(this->denom == TEN_DOLLARS)
+    {
+        return 1000;
+    }
+    else if (this->denom == FIVE_DOLLARS)
+    {
+        return 500;
+    }
+    else if (this->denom == TWO_DOLLARS)
+    {
+        return 200;
+    }
+    else if (this->denom == ONE_DOLLAR)
+    {
+        return 100;
+    }
+    else if (this->denom == FIFTY_CENTS)
+    {
+        return 50;
+    }
+    else if (this->denom == TWENTY_CENTS)
+    {
+        return 20;
+    }
+    else if (this->denom == TEN_CENTS)
+    {
+        return 10;
+    }
+    else if (this->denom == FIVE_CENTS)
+    {
+        return 5;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 void Coin::Display()
