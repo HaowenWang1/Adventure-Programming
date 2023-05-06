@@ -164,7 +164,15 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
                 GivenMoney = MoneyCheck(GivenMoney);
                 NeedMoney = NeedMoney - GivenMoney;
             }
-            ChangeMoney = NeedMoney * -1;
+            if(NeedMoney < 0)
+            {
+                ChangeMoney = NeedMoney * -1;
+            }
+            else
+            {
+                ChangeMoney = 0;
+            }
+            
             cout << "Here is your " << SearchedItem->data->name << " and your change of $ " << ChangeMoney/100 << ": ";
         }
     }
