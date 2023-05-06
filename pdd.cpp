@@ -9,6 +9,7 @@ using namespace std;
 
 vector<Stock> loadStocks(string filename)
 {
+    //create a vector to hold data
     vector<Stock> items;
     ifstream inputfile(filename);
 
@@ -47,6 +48,7 @@ vector<Stock> loadStocks(string filename)
 
 vector<Coin> loadCoin(string filename)
 {
+    //create a vector to hold coin data
     vector<Coin> items;
     ifstream inputfile(filename);
 
@@ -110,7 +112,7 @@ vector<Coin> loadCoin(string filename)
 
 int MoneyCheck(int Money)
 {
-   
+   //check if the input money is valable
     if(Money != 1000 && Money != 500 && Money != 200 && Money != 100 && Money != 50 && Money != 20 && Money != 10 && Money != 5)
     {
         cout << "Error :$" << Money/100 << " is not a valid denomination of money. Please try again."<< endl;
@@ -126,17 +128,20 @@ int MoneyCheck(int Money)
 
 void Option_1(LinkedList* stockList)
 {
+    //print the items
     stockList->PrintItems();
 }
 
 void Option_2(LinkedList* stockList, vector<Coin>* coins)
 {
+    //search a item
     string SearchID;
     Node* SearchedItem = nullptr;
     cout << "Purchase Item" << endl;
     cout << "-------------" << endl;
     cout << "Please enter the id of the item you wish to purchase:";
     cin >> SearchID;
+    //check if the item is in list
     while(SearchedItem == nullptr )
     {
         SearchedItem = stockList->get(SearchID);
@@ -161,8 +166,10 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             {
                 cout << "You still need to give us $" << NeedMoney/100 << ":" ;
                 cin >> GivenMoney;
+                //check if the money if valble
                 GivenMoney = MoneyCheck(GivenMoney);
                 NeedMoney = NeedMoney - GivenMoney;
+                //add money to list depend on user's input
                 for (Coin& item : *coins)
                 {
                     if(item.LoadOne() == GivenMoney)
@@ -181,6 +188,7 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             }
             
             cout << "Here is your " << SearchedItem->data->name << " and your change of $ " << ChangeMoney/100 << ": ";
+
         }
     }
 }
@@ -196,11 +204,13 @@ void Option_6(vector<Coin> coins)
             item.Display();
         }
 }
+
 int main(int argc, char **argv)
 {
+    //write stokes into items vector
     vector<Stock> items = loadStocks("stock.dat");
     LinkedList stockList;
-
+    //add items to list
     for (Stock item : items)
     {
         stockList.addBack(item);
