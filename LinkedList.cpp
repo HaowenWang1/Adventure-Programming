@@ -68,6 +68,20 @@ int LinkedList::size() {
     return count;
 }
 
+Node* LinkedList::get(string ID)
+{
+    Node* current = head;
+    Node* returnNode = nullptr;
+    while (current != nullptr)
+    {
+        if(ID == current->data->id)
+        {
+            returnNode = current;
+        }
+    }
+    return returnNode;
+}
+
 // Node LinkedList::get(int index){
 //     int count = 0;
 //     Node* current = head;
