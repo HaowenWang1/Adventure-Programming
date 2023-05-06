@@ -16,6 +16,8 @@ public:
 
     int size();
 
+    Node* get(string ID);
+
     void PrintItems();
 private:
     // the beginning of the list

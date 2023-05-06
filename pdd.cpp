@@ -154,7 +154,7 @@ int main(int argc, char **argv)
         cin >> option;
         if(option == 1)
         {
-            Option_1(stockList);
+            stockList.PrintItems();
         }
         else if(option == 2)
         {
