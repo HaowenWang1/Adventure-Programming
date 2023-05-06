@@ -108,9 +108,34 @@ vector<Coin> loadCoin(string filename)
     return items;
 }
 
-void Option_1(LinkedList stockList)
+void Option_1(LinkedList* stockList)
 {
-    stockList.PrintItems();
+    stockList->PrintItems();
+}
+
+void Option_2(LinkedList* stockList, vector<Coin>* coins)
+{
+    string SearchID;
+    Node* SearchedItem = nullptr;
+    cout << "Purchase Item" << endl;
+    cout << "-------------" << endl;
+    cout << "Please enter the id of the item you wish to purchase:";
+    cin >> SearchID;
+    while(SearchedItem == nullptr )
+    {
+        SearchedItem = stockList->get(SearchID);
+        if (SearchedItem == nullptr)
+        {
+            cout << "No this item, try again:";
+            cin >> SearchID;
+        }
+        else
+        {
+            cout << "You have select";
+            cout << "'" << SearchedItem->data->name << SearchedItem->data->description << "'";
+            cout << "This will cost you $ " << SearchedItem->data->price.dollars << "." << SearchedItem->data->price.cents << "." << endl;
+        }
+    }
 }
 
 void Option_6(vector<Coin> coins)
@@ -158,7 +183,7 @@ int main(int argc, char **argv)
         }
         else if(option == 2)
         {
-            cout << "option2" << endl;
+            Option_2(&stockList , &coins);
         }
         else if(option == 3)
         {

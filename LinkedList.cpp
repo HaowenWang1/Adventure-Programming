@@ -1,6 +1,7 @@
 #include "LinkedList.h"
 #include <iostream>
 #include <iomanip>
+#include <string>
 using namespace std;
 
 
@@ -78,6 +79,7 @@ Node* LinkedList::get(string ID)
         {
             returnNode = current;
         }
+        current = current->next;
     }
     return returnNode;
 }
