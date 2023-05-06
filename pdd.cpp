@@ -99,8 +99,8 @@ vector<Coin> loadCoin(string filename)
             getline(ss,token);
             item.count = stoi(token);
 
-            //items.insert(items.begin(), item);
-            items.push_back(item);
+            items.insert(items.begin(), item);
+            //items.push_back(item);
         }
     }
     else
