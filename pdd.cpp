@@ -156,6 +156,7 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             int GivenMoney;
             double ChangeMoney;
             bool continueInput = true;
+            std::vector<double> change_coins;
             cout << "You have select";
             cout << "'" << SearchedItem->data->name << SearchedItem->data->description << "'";
             cout << "This will cost you $ " << SearchedItem->data->price.dollars << "." << SearchedItem->data->price.cents << "." << endl;
@@ -178,18 +179,40 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
                     }
                 }
             }
-            if(NeedMoney < 0)
+            ChangeMoney = -NeedMoney;
+            while (ChangeMoney > 0)
             {
-                ChangeMoney = NeedMoney * -1;
+                bool coin_found = false;
+                for (int i = coins->size() - 1; i >= 0; i--)
+                {
+                    Coin& item = coins->at(i);
+                    if (item.LoadOne() <= ChangeMoney && item.count > 0)
+                    {
+                        ChangeMoney = ChangeMoney - item.LoadOne();
+                        item.ReduceCoin();
+                        coin_found = true;
+                        change_coins.push_back(item.LoadOne());
+                        
+                    }
+                }
+                if (!coin_found)
+                {
+                    std::cout << "Unable to find coins to make change!" << std::endl;
+                    
+                }
             }
-            else
-            {
-                ChangeMoney = 0;
+            cout << "Here is your " << SearchedItem->data->name << " and your change of $ " << -NeedMoney/100 << ": ";
+            for (double coin : change_coins)
+            {   
+                if (coin>=100)
+                {
+                    std::cout << coin/100 << " dollars,";
+                }else
+                {
+                    std::cout << coin << " cents,";
+                }
             }
             SearchedItem->data->on_hand = SearchedItem->data->on_hand - 1;
-            
-            cout << "Here is your " << SearchedItem->data->name << " and your change of $ " << ChangeMoney/100 << ": ";
-
         }
     }
 }
