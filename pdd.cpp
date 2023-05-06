@@ -163,6 +163,13 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
                 cin >> GivenMoney;
                 GivenMoney = MoneyCheck(GivenMoney);
                 NeedMoney = NeedMoney - GivenMoney;
+                for (Coin& item : *coins)
+                {
+                    if(item.LoadOne() == GivenMoney)
+                    {
+                        item.AddCoin();
+                    }
+                }
             }
             if(NeedMoney < 0)
             {
