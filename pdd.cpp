@@ -147,7 +147,7 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
         SearchedItem = stockList->get(SearchID);
         if (SearchedItem == nullptr)
         {
-            cout << "No this item, try again:";
+            cout << "No this item, or the item is sale out, try again:";
             cin >> SearchID;
         }
         else
