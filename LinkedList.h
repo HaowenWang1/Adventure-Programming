@@ -20,6 +20,10 @@ public:
     Node* get(string ID);
 
     void PrintItems();
+
+    Node* GetHead() const{
+    return head;
+}
 private:
     // the beginning of the list
     Node* head;

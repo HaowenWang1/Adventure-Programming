@@ -186,11 +186,32 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             {
                 ChangeMoney = 0;
             }
+            SearchedItem->data->on_hand = SearchedItem->data->on_hand - 1;
             
             cout << "Here is your " << SearchedItem->data->name << " and your change of $ " << ChangeMoney/100 << ": ";
 
         }
     }
+}
+
+void Option_3(const string& filename, LinkedList&  LinkedList)
+{
+    ofstream file(filename, ios::binary);
+    if (!file.is_open())
+    {
+        cout << "cannot open the file: "<< filename << endl;
+        return;
+    }
+
+    Node* currentNode = LinkedList.GetHead();
+    while (currentNode != nullptr)
+    {
+        Stock* stock = currentNode->data;
+        string line = stock->id + "|" + stock->name + "|" + stock->description + "|" + to_string(stock->price.dollars) + "." + to_string(stock->price.cents) + "|" + to_string(stock->on_hand) + "\n";
+        file.write(line.c_str(),line.size());
+        currentNode = currentNode->next;
+    }
+    file.close();
 }
 
 void Option_6(vector<Coin> coins)
@@ -244,7 +265,8 @@ int main(int argc, char **argv)
         }
         else if(option == 3)
         {
-            cout << "option3" << endl;
+            string filename = "try.dat";
+            Option_3(filename, stockList);
         }
         else if(option == 4)
         {
