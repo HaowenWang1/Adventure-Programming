@@ -108,6 +108,22 @@ vector<Coin> loadCoin(string filename)
     return items;
 }
 
+int MoneyCheck(int Money)
+{
+   
+    if(Money != 1000 && Money != 500 && Money != 200 && Money != 100 && Money != 50 && Money != 20 && Money != 10 && Money != 5)
+    {
+        cout << "Error :$" << Money/100 << " is not a valid denomination of money. Please try again."<< endl;
+        Money = 0;
+    }
+    else
+    {
+        Money = Money;
+    }
+
+    return Money;
+}
+
 void Option_1(LinkedList* stockList)
 {
     stockList->PrintItems();
@@ -131,9 +147,25 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
         }
         else
         {
+            double NeedMoney;
+            int GivenMoney;
+            double ChangeMoney;
+            bool continueInput = true;
             cout << "You have select";
             cout << "'" << SearchedItem->data->name << SearchedItem->data->description << "'";
             cout << "This will cost you $ " << SearchedItem->data->price.dollars << "." << SearchedItem->data->price.cents << "." << endl;
+            NeedMoney = SearchedItem->data->price.dollars*100 + SearchedItem->data->price.cents;
+            cout << "Please hand over the money - type in the value of each note/coin in cents." << endl;
+            cout << "Please enter or ctrl-d on a new line to cancel this purchase:" << endl;
+            while( NeedMoney > 0)
+            {
+                cout << "You still need to give us $" << NeedMoney/100 << ":" ;
+                cin >> GivenMoney;
+                GivenMoney = MoneyCheck(GivenMoney);
+                NeedMoney = NeedMoney - GivenMoney;
+            }
+            ChangeMoney = NeedMoney * -1;
+            cout << "Here is your " << SearchedItem->data->name << " and your change of $ " << ChangeMoney/100 << ": ";
         }
     }
 }
