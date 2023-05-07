@@ -155,7 +155,6 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             double NeedMoney;
             int GivenMoney;
             double ChangeMoney;
-            bool continueInput = true;
             std::vector<double> change_coins;
             cout << "You have select";
             cout << "'" << SearchedItem->data->name << SearchedItem->data->description << "'";
