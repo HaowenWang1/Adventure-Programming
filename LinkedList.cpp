@@ -84,18 +84,26 @@ Node* LinkedList::get(string ID)
     return returnNode;
 }
 
-// Node LinkedList::get(int index){
-//     int count = 0;
-//     Node* current = head;
-//     Node* returnNode;
-//     if (index >=0 && index < size())
-//     {
-//         while(count < index)
-//         {
-//             ++count;
-//             current = current->next;
-//         }
-//         returnNode = current;
-//     }
-    
-// }
+void LinkedList::removeItem(string ID)
+{
+    Node* currentNode = head;
+    Node* previousNode = nullptr;   
+
+    while (currentNode != nullptr && currentNode->data->id != ID) {
+        previousNode = currentNode;
+        currentNode = currentNode->next;
+    }
+
+    if (currentNode != nullptr) {
+        
+        if (previousNode != nullptr) {
+            previousNode->next = currentNode->next;
+        }
+        
+        else {
+            head = currentNode->next;
+        }
+
+        cout << "The item has been delete." << endl;
+    }
+}

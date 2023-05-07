@@ -243,6 +243,24 @@ void Option_3(const string& filename, LinkedList&  LinkedList)
     LinkedList.~LinkedList();
 }
 
+void Option_5(LinkedList *LinkedList)
+{
+    cout << "Which item you want to remove: ";
+    string id;
+    cin >> id;
+    Node* currItem = nullptr;
+    while (currItem == nullptr)
+    {
+        currItem = LinkedList->get(id);
+        if (currItem == nullptr)
+        {
+            cout << "We don't have this item. Please try agian: ";
+            cin >> id;
+        }
+    }
+    LinkedList->removeItem(id);
+}
+
 void Option_6(vector<Coin> coins)
 {
     cout << "Coins Summary" << endl;
@@ -303,7 +321,7 @@ int main(int argc, char **argv)
         }
         else if(option == 5)
         {
-            cout << "option5" << endl;
+            Option_5(&stockList);
         }
         else if(option == 6)
         {
