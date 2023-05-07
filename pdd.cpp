@@ -14,7 +14,7 @@ int main(int argc, char **argv)
     cout << "\t6.Display Coins" << endl;
     cout << "\t7.Reset Stock" << endl;
     cout << "\t8.Reset Coins" << endl;
-    cout << "\t9. Abort Program" << endl;
+    cout << "\t9.Abort Program" << endl;
     cout << "Select your option (1-9): ";
 
     int option;
