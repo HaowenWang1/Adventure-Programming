@@ -25,6 +25,8 @@ public:
 
     bool checkItem(string ID);
 
+    void deleteLinkedList();
+
     Node* GetHead() const{
     return head;
 }

@@ -77,6 +77,13 @@ void LinkedList::PrintItems()
         current = current->next;
     }
 }
+void LinkedList::deleteLinkedList() {
+    while (head != nullptr) {
+        Node* current = head;
+        head = head->next;
+        delete current;
+    }
+}
 
 int LinkedList::size() {
    

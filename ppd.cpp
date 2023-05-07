@@ -401,8 +401,12 @@ void Option_7(LinkedList* stockList){
     while(getline(input,line)){
         output<<line<<endl;
     }
-   
-   
+    stockList->deleteLinkedList();
+    vector<Stock> items = loadStocks("stock.dat");
+    for (size_t i = 0; i < items.size(); i++)
+    {
+        stockList->addBack(items[i]);
+    }
     std::cout<<"All stocks has been reset to the default value of "<<DEFAULT_STOCK_LEVEL<<std::endl;
 
 }
