@@ -95,15 +95,15 @@ void LinkedList::removeItem(string ID)
     }
 
     if (currentNode != nullptr) {
-        
         if (previousNode != nullptr) {
             previousNode->next = currentNode->next;
-        }
-        
-        else {
+        } else {
             head = currentNode->next;
         }
+        delete currentNode;
+        count--;
+        cout << count <<endl;
 
-        cout << "The item has been delete." << endl;
+        cout << "The item has been deleted." << endl;
     }
 }
