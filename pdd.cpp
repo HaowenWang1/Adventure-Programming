@@ -248,17 +248,17 @@ void Option_5(LinkedList *LinkedList)
     cout << "Which item you want to remove: ";
     string id;
     cin >> id;
-    Node* currItem;
-    currItem = LinkedList->get(id);
-    if (currItem == nullptr)
+    Node* currItem = nullptr;
+    while (currItem == nullptr)
     {
-        cout << "We don't have this item. Please try agian: ";
-        cin >> id;
+        currItem = LinkedList->get(id);
+        if (currItem == nullptr)
+        {
+            cout << "We don't have this item. Please try agian: ";
+            cin >> id;
+        }
     }
-    else
-    {
-        LinkedList->removeItem(id);
-    }
+    LinkedList->removeItem(id);
 }
 
 void Option_6(vector<Coin> coins)
