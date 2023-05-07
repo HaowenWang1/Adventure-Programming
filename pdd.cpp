@@ -315,7 +315,16 @@ int main(int argc, char **argv)
         }
         else if(option == 7)
         {
-            cout << "option7" << endl;
+            // cout << "option7" << endl;
+//     void LinkedList::resetStock() {
+//     Node* current = head;
+//     while (current != nullptr) {
+//         current->data->on_hand = current->data->initial_on_hand;
+//         current = current->next;
+//     }
+// }
+// }
+        
         }
         else if(option == 8)
         {
