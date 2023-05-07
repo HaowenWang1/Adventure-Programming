@@ -295,12 +295,28 @@ void Option_4(LinkedList *LinkedList)
             NumberOfError++;
         }
         cout << "Enter the price for the item: ";
-        cin >> EnterPrice;
-        dollor = static_cast<int>(EnterPrice);
-        double Centspart = EnterPrice - dollor;
-        cents = static_cast<int>(Centspart * 100);
+        
+        if(!(cin >> EnterPrice))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            NumberOfError++;
+            dollor = 0;
+            cents = 0;
+        }
+        else
+        {
+            dollor = static_cast<int>(EnterPrice);
+            double Centspart = EnterPrice - dollor;
+            cents = static_cast<int>(Centspart * 100);
+        }
         cout << "Enter the item you have: ";
-        cin >> Newon_hands;
+        if(!(cin >> Newon_hands))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            NumberOfError++;
+        }
         if (NumberOfError != 0)
         {
             cout << "The item cannot be added to the list" << endl;
@@ -366,7 +382,7 @@ int main(int argc, char **argv)
     
     
     int option = 0;
-    while( option != 3)
+    while( option != 3 )
     {   
         cout << endl;
         cout << "Main Menu: " << endl;
