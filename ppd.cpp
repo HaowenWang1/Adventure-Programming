@@ -285,6 +285,7 @@ void Option_4(LinkedList *LinkedList)
     int NumberOfError = 0;
     while(LoopContinue == true)
     {
+        NumberOfError = 0;
         cout << "The ID of the new stock will be: ";
         cin >> newID;
         cout <<endl;
@@ -296,7 +297,7 @@ void Option_4(LinkedList *LinkedList)
         {
             NumberOfError++;
         }
-        for (int i = i; i < 5; i++)
+        for (int i = 1; i < 5; i++)
         {
             if (!std::isdigit(newID[i]))
             {
