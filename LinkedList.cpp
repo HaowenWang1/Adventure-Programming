@@ -83,19 +83,3 @@ Node* LinkedList::get(string ID)
     }
     return returnNode;
 }
-
-// Node LinkedList::get(int index){
-//     int count = 0;
-//     Node* current = head;
-//     Node* returnNode;
-//     if (index >=0 && index < size())
-//     {
-//         while(count < index)
-//         {
-//             ++count;
-//             current = current->next;
-//         }
-//         returnNode = current;
-//     }
-    
-// }
