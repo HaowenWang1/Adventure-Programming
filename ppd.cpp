@@ -7,7 +7,9 @@
 #include <vector>
 #include <iomanip>
 #include <limits>
+#include <algorithm>
 #include "LinkedList.h"
+#include "Coin.h"
 using namespace std;
 
 vector<Stock> loadStocks(string filename)
@@ -135,6 +137,30 @@ void Option_1(LinkedList* stockList)
     stockList->PrintItems();
 }
 
+bool compareCoins(const Coin& coin1, const Coin& coin2) {
+    return coin1.LoadOne() > coin2.LoadOne();
+}
+
+void UpdateCoinFile(const vector<Coin>* coins, const string& coinFile) {
+    ofstream file(coinFile);
+    if (!file.is_open()) {
+        cout << "Failed to open " << coinFile << endl;
+        return;
+    }
+
+  
+    vector<Coin> sortedCoins = *coins;
+    sort(sortedCoins.begin(), sortedCoins.end(), compareCoins);
+
+    for (const Coin& coin : sortedCoins) {
+        file << coin.LoadOne() << "," << coin.count << endl;
+    }
+
+    file.close();
+
+    cout << "Coin file updated." << endl;
+}
+
 void Option_2(LinkedList* stockList, vector<Coin>* coins)
 {
     //search a item
@@ -217,6 +243,7 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             SearchedItem->data->on_hand = SearchedItem->data->on_hand - 1;
         }
     }
+    UpdateCoinFile(coins, "coins.dat");
 }
 
 void Option_3(const string& filename, LinkedList&  LinkedList)
@@ -367,6 +394,46 @@ void Option_6(vector<Coin> coins)
     }
 }
 
+void Option_7(LinkedList* stockList){
+    ifstream input("new_stock.dat");
+    ofstream output("stock.dat");
+    string line;
+    while(getline(input,line)){
+        output<<line<<endl;
+    }
+   
+   
+    std::cout<<"All stocks has been reset to the default value of "<<DEFAULT_STOCK_LEVEL<<std::endl;
+
+}
+
+
+void Option_8(vector<Coin> coins)
+{
+    ifstream input("new_coins.dat");
+    if (!input.is_open()) {
+        cout << "Failed to open new_coin.dat" << endl;
+        return;
+    }
+
+    ofstream output("coins.dat");
+    if (!output.is_open()) {
+        cout << "Failed to open coin.dat" << endl;
+        input.close();
+        return;
+    }
+
+    string line;
+    while (getline(input, line)) {
+        output << line << endl;
+    }
+
+    input.close();
+    output.close();
+
+    cout << "Coin file reset." << endl;
+}
+
 int main(int argc, char **argv)
 {
     //write stokes into items vector
@@ -409,7 +476,7 @@ int main(int argc, char **argv)
         }
         else if(option == 3)
         {
-            string filename = "try.dat";
+            string filename = "stock.dat";
             Option_3(filename, stockList);
         }
         else if(option == 4)
@@ -430,19 +497,16 @@ int main(int argc, char **argv)
         }
         else if(option == 7)
         {
-            cout << "option7" << endl;
+            Option_7(&stockList);
         }
         else if(option == 8)
         {
-            cout << "option8" << endl;
+            Option_8(coins);
         }
         else if(option == 9)
         {
-            cout << "option9" << endl;
-        }
-        else if(option == 10)
-        {
-            cout << "bye" << endl;
+            cout << "bye!" << endl;
+            return EXIT_SUCCESS;
         }
         else
         {

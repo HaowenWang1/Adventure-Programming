@@ -13,7 +13,7 @@ void Coin::AddCoin(){
     this->count = this->count + 1;
 }
 
-int Coin::LoadOne()
+int Coin::LoadOne() const
 {
     if(this->denom == TEN_DOLLARS)
     {
