@@ -7,7 +7,7 @@ using namespace std;
 
 LinkedList::LinkedList() {
    head = nullptr;
-    count = 0;
+   count = 0;
    // TODO
 }
 
@@ -82,4 +82,28 @@ Node* LinkedList::get(string ID)
         current = current->next;
     }
     return returnNode;
+}
+
+void LinkedList::removeItem(string ID)
+{
+    Node* currentNode = head;
+    Node* previousNode = nullptr;   
+
+    while (currentNode != nullptr && currentNode->data->id != ID) {
+        previousNode = currentNode;
+        currentNode = currentNode->next;
+    }
+
+    if (currentNode != nullptr) {
+        
+        if (previousNode != nullptr) {
+            previousNode->next = currentNode->next;
+        }
+        
+        else {
+            head = currentNode->next;
+        }
+
+        cout << "The item has been delete." << endl;
+    }
 }
