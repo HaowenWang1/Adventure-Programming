@@ -97,14 +97,16 @@ void LinkedList::removeItem(string ID)
     if (previousNode == nullptr)
     {
         head = head->next;
+        currentNode = nullptr;
     }
     //in middle
     else if (currentNode != nullptr)
     {
         previousNode->next = currentNode->next;
+        currentNode = nullptr;
     }
     //in end
-    else if (currentNode->next == nullptr){
+    else{
         currentNode = previousNode;
         previousNode->next = nullptr;
     }
