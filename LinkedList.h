@@ -23,6 +23,8 @@ public:
 
     void removeItem(string ID);
 
+    bool checkItem(string ID);
+
     Node* GetHead() const{
     return head;
 }

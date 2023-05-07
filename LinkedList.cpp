@@ -43,6 +43,20 @@ void LinkedList::addBack(Stock data)
     count++;
 }
 
+bool LinkedList::checkItem(string ID)
+{
+    bool HaveIt = false;
+    Node* current = head;
+    while (current != nullptr)
+    {
+        if(current->data->id == ID)
+        {
+            HaveIt = true;
+        }
+        current = current->next;
+    }
+    return HaveIt;
+}
 void LinkedList::PrintItems()
 {
     const int idWidth = 5;

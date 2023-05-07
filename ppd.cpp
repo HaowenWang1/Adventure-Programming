@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cctype>
+#include <cmath>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -243,6 +245,82 @@ void Option_3(const string& filename, LinkedList&  LinkedList)
     LinkedList.~LinkedList();
 }
 
+void Option_4(LinkedList *LinkedList)
+{
+    string newID;
+    string newName;
+    string newdescription;
+    double EnterPrice;
+    int dollor;
+    int cents;
+    unsigned Newon_hands;
+    bool LoopContinue = true;
+    int NumberOfError = 0;
+    while(LoopContinue == true)
+    {
+        cout << "The ID of the new stock will be: ";
+        cin >> newID;
+        cout <<endl;
+        if(newID.length() != 5)
+        {
+            NumberOfError++;
+        }
+        if(newID[0] != 'I')
+        {
+            NumberOfError++;
+        }
+        for (int i = i; i < 5; i++)
+        {
+            if (!std::isdigit(newID[i]))
+            {
+                NumberOfError++;
+            }
+        }
+        if(LinkedList->checkItem(newID) == true)
+        {
+            NumberOfError++;
+        }
+        
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Enter the item name: ";
+        getline(cin,newName);
+        if(newName.length() > 40)
+        {
+            NumberOfError++;
+        }
+        cout << "Enter the item description: ";
+        getline(cin,newdescription);
+        if(newdescription.length() > 255)
+        {
+            NumberOfError++;
+        }
+        cout << "Enter the price for the item: ";
+        cin >> EnterPrice;
+        dollor = static_cast<int>(EnterPrice);
+        double Centspart = EnterPrice - dollor;
+        cents = static_cast<int>(Centspart * 100);
+        cout << "Enter the item you have: ";
+        cin >> Newon_hands;
+        if (NumberOfError != 0)
+        {
+            cout << "The item cannot be added to the list" << endl;
+            cout << "Make sure the id is form as start of 'I' with 4 inter number; name is less than 40; description is less than 255; price enter as double; on_hand enter as inter." << endl;
+        }
+        else
+        {
+            LoopContinue = false;
+        }
+    }
+    Stock item;
+    item.id = newID;
+    item.name = newName;
+    item.description = newdescription;
+    item.price.dollars = static_cast<unsigned int>(dollor);
+    item.price.cents = static_cast<unsigned int>(cents);
+    item.on_hand = static_cast<unsigned int>(Newon_hands);
+    LinkedList->addBack(item);
+}
+
 void Option_5(LinkedList *LinkedList)
 {
     cout << "Which item you want to remove: ";
@@ -320,7 +398,7 @@ int main(int argc, char **argv)
         }
         else if(option == 4)
         {
-            cout << "option4" << endl;
+            Option_4(&stockList);
         }
         else if(option == 5)
         {
