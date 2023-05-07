@@ -337,7 +337,7 @@ int main(int argc, char **argv)
         }
         else if(option == 9)
         {
-            cout << "option9" << endl;
+            return EXIT_SUCCESS;
         }
         else if(option == 10)
         {
