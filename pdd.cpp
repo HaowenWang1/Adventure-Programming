@@ -155,7 +155,7 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             double NeedMoney;
             int GivenMoney;
             double ChangeMoney;
-            std::vector<double> change_coins;
+            vector<double> change_coins;
             cout << "You have select";
             cout << "'" << SearchedItem->data->name << SearchedItem->data->description << "'";
             cout << "This will cost you $ " << SearchedItem->data->price.dollars << "." << SearchedItem->data->price.cents << "." << endl;
@@ -170,9 +170,10 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
                 GivenMoney = MoneyCheck(GivenMoney);
                 NeedMoney = NeedMoney - GivenMoney;
                 //add money to list depend on user's input
-                for (Coin& item : *coins)
+                for (size_t i = 0; i < coins->size(); i++)
                 {
-                    if(item.LoadOne() == GivenMoney)
+                    Coin& item = (*coins)[i];
+                    if (item.LoadOne() == GivenMoney)
                     {
                         item.AddCoin();
                     }
@@ -196,19 +197,18 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
                 }
                 if (!coin_found)
                 {
-                    std::cout << "Unable to find coins to make change!" << std::endl;
+                    cout << "Unable to find coins to make change!" << endl;
                     
                 }
             }
             cout << "Here is your " << SearchedItem->data->name << " and your change of $ " << -NeedMoney/100 << ": ";
-            for (double coin : change_coins)
-            {   
-                if (coin>=100)
-                {
-                    std::cout << coin/100 << " dollars,";
-                }else
-                {
-                    std::cout << coin << " cents,";
+            for (size_t i = 0; i < change_coins.size(); i++) 
+            {
+                double coin = change_coins[i];
+                if (coin >= 100) {
+                    cout << coin / 100 << " dollars,";
+                } else {
+                    cout << coin << " cents,";
                 }
             }
             SearchedItem->data->on_hand = SearchedItem->data->on_hand - 1;
@@ -266,10 +266,10 @@ void Option_6(vector<Coin> coins)
     cout << "-------------" << endl;
     cout << "Denomination    |    Count" << endl;
     cout << "----------------------------" << endl;
-    for (Coin item : coins)
-        {
-            item.Display();
-        }
+    for (size_t i = 0; i < coins.size(); i++)
+    {
+        coins[i].Display();
+    }
 }
 
 int main(int argc, char **argv)
@@ -278,9 +278,9 @@ int main(int argc, char **argv)
     vector<Stock> items = loadStocks("stock.dat");
     LinkedList stockList;
     //add items to list
-    for (Stock item : items)
+    for (size_t i = 0; i < items.size(); i++)
     {
-        stockList.addBack(item);
+        stockList.addBack(items[i]);
     }
     
     vector<Coin> coins = loadCoin("coins.dat");
