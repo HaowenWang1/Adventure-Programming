@@ -230,11 +230,17 @@ void Option_3(const string& filename, LinkedList&  LinkedList)
     while (currentNode != nullptr)
     {
         Stock* stock = currentNode->data;
-        string line = stock->id + "|" + stock->name + "|" + stock->description + "|" + to_string(stock->price.dollars) + "." + to_string(stock->price.cents) + "|" + to_string(stock->on_hand) + "\n";
-        file.write(line.c_str(),line.size());
+        ostringstream priceStream;
+        priceStream << fixed;
+        priceStream.precision(2);
+        priceStream << stock->price.dollars << "." << setw(2) << setfill('0') << stock->price.cents;
+        string line = stock->id + "|" + stock->name + "|" + stock->description + "|" + priceStream.str() + "|" + to_string(stock->on_hand) + "\n";
+        file.write(line.c_str(), line.size());
         currentNode = currentNode->next;
     }
+    cout << "Created the file " << filename << " for new stock list" <<endl;
     file.close();
+    LinkedList.~LinkedList();
 }
 
 void Option_6(vector<Coin> coins)
@@ -274,7 +280,7 @@ int main(int argc, char **argv)
     cout << "\t9. Abort Program" << endl;
     
     int option = 0;
-    while( option != 10)
+    while( option != 3)
     {   
         cout << "Select your option (1-9): ";
         cin >> option;
