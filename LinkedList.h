@@ -21,6 +21,8 @@ public:
 
     void PrintItems();
 
+    void removeItem(string ID);
+
     Node* GetHead() const{
     return head;
 }
