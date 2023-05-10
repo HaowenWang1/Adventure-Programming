@@ -601,7 +601,7 @@ int main(int argc, char **argv)
         }
         else if(option == 7)
         {
-            cout << "option7" << endl;
+            cout << "option" << endl;
         }
         else if(option == 8)
         {
