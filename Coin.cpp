@@ -53,6 +53,8 @@ int Coin::LoadOne()
     }
 }
 
+
+
 void Coin::Display()
 {
     const int denomination = 16;

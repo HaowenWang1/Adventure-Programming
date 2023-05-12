@@ -23,9 +23,12 @@ public:
 
     void AddCoin();
 
+    // void CoinReset();
+
     void Display();
 
     int LoadOne();
+
     // the denomination type
     enum Denomination denom;
     
