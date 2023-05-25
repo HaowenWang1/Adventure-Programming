@@ -118,10 +118,6 @@ int MoneyCheck(int Money)
         cout << "Error :$" << Money/100 << " is not a valid denomination of money. Please try again."<< endl;
         Money = 0;
     }
-    else
-    {
-        Money = Money;
-    }
 
     return Money;
 }
@@ -155,17 +151,17 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             double NeedMoney;
             int GivenMoney;
             double ChangeMoney;
-            bool continueInput = true;
+            //bool continueInput = true;
             std::vector<double> change_coins;
             cout << "You have select";
             cout << "'" << SearchedItem->data->name << SearchedItem->data->description << "'";
-            cout << "This will cost you $ " << SearchedItem->data->price.dollars << "." << SearchedItem->data->price.cents << "." << endl;
+            cout << "This will cost you $ " << "\033[0;31m" << "\033[1m" << SearchedItem->data->price.dollars << "." << SearchedItem->data->price.cents << "." << "\033[0m" << endl;
             NeedMoney = SearchedItem->data->price.dollars*100 + SearchedItem->data->price.cents;
             cout << "Please hand over the money - type in the value of each note/coin in cents." << endl;
             cout << "Please enter or ctrl-d on a new line to cancel this purchase:" << endl;
             while( NeedMoney > 0)
             {
-                cout << "You still need to give us $" << NeedMoney/100 << ":" ;
+                cout << "You still need to give us $" << "\033[0;31m" << "\033[1m" << NeedMoney/100 << "\033[0m" << ":" ;
                 cin >> GivenMoney;
                 //check if the money if valble
                 GivenMoney = MoneyCheck(GivenMoney);
