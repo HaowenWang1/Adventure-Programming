@@ -393,6 +393,7 @@ void Option_4(LinkedList *LinkedList)
                 if(newdescription.length() > 255)
                 {
                     Discriptioncontinue = true;
+                    cout << "Your description is too " << endl;
                 }
                 else
                 {
