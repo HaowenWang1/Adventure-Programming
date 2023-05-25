@@ -168,21 +168,27 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
     Node* SearchedItem = nullptr;
     cout << "Purchase Item" << endl;
     cout << "-------------" << endl;
-    cout << "Please enter the id of the item you wish to purchase:";
-    cin >> SearchID;
+    cout << "Please enter the id of the item you wish to purchase(you can type 'help' to see what should enter):";
     //check if the item is in list
     while(SearchedItem == nullptr )
     {
+        cin >> SearchID;
         SearchedItem = stockList->get(SearchID);
-        if (SearchedItem == nullptr)
+        if (SearchedItem == nullptr && SearchID == "help")
         {
-            cout << "No this item, or the item is sale out, try again:";
-            cin >> SearchID;
+            cout << "In here, you should print a ID of the item you want to buy, like I0001 etc" << endl;
+            cout << "Please enter the id of the item you wish to purchase:";
+        }
+        else if (SearchedItem == nullptr)
+        {
+            cout << "No this item, or the item is sale out, you can also type 'help' to see what you can do" << endl;
+            cout << "try again:" ;
         }
         else
         {
             double NeedMoney;
             int GivenMoney;
+            string GivenMoneyInString;
             double ChangeMoney;
             vector<double> change_coins;
             cout << "You have select";
@@ -194,17 +200,32 @@ void Option_2(LinkedList* stockList, vector<Coin>* coins)
             while( NeedMoney > 0)
             {
                 cout << "You still need to give us $" << NeedMoney/100 << ":" ;
-                cin >> GivenMoney;
-                //check if the money if valble
-                GivenMoney = MoneyCheck(GivenMoney);
-                NeedMoney = NeedMoney - GivenMoney;
-                //add money to list depend on user's input
-                for (size_t i = 0; i < coins->size(); i++)
+                cin >> GivenMoneyInString;
+                if(GivenMoneyInString == "help")
                 {
-                    Coin& item = (*coins)[i];
-                    if (item.LoadOne() == GivenMoney)
+                    cout << "In here, you should type the money you wan to pay as cents and interger as the unit like 200, 500 etc." << endl;
+                }
+                else
+                {
+                    try
                     {
-                        item.AddCoin();
+                        GivenMoney = stoi(GivenMoneyInString);
+                        //check if the money if valble
+                        GivenMoney = MoneyCheck(GivenMoney);
+                        NeedMoney = NeedMoney - GivenMoney;
+                        //add money to list depend on user's input
+                        for (size_t i = 0; i < coins->size(); i++)
+                        {
+                            Coin& item = (*coins)[i];
+                            if (item.LoadOne() == GivenMoney)
+                            {
+                                item.AddCoin();
+                            }
+                        }
+                    }
+                    catch (const invalid_argument &ia)
+                    {
+                        cerr << "Please inter a interger number like 200, 500 etc. If you do not know how to to, you can type a 'help' to help you." << endl;
                     }
                 }
             }
@@ -282,46 +303,104 @@ void Option_4(LinkedList *LinkedList)
     int cents;
     unsigned Newon_hands;
     bool LoopContinue = true;
+    bool NewIDloopContinue = true;
     int NumberOfError = 0;
     while(LoopContinue == true)
     {
-        NumberOfError = 0;
-        cout << "The ID of the new stock will be: ";
-        cin >> newID;
-        cout <<endl;
-        if(newID.length() != 5)
+        while(NewIDloopContinue == true)
         {
-            NumberOfError++;
-        }
-        if(newID[0] != 'I')
-        {
-            NumberOfError++;
-        }
-        for (int i = 1; i < 5; i++)
-        {
-            if (!std::isdigit(newID[i]))
+            NumberOfError = 0;
+            cout << "The ID of the new stock will be(you can type 'help' to see what should enter): ";
+            cin >> newID;
+            if(newID == "help")
             {
-                NumberOfError++;
+                cout << "In this situation, you should type a new item ID, and follow the format:" << endl;
+                cout << "start with 'I' with 4 interger like I0009."<< endl;
+                cout << "also the ID should be new." << endl;
+            }
+            else
+            {
+                cout <<endl;
+                if(newID.length() != 5)
+                {
+                    NumberOfError++;
+                    cout << "The ID is more or less than 5, it should be 5." << endl;
+                }
+                if(newID[0] != 'I')
+                {
+                    NumberOfError++;
+                    cout << "The ID should start as 'I'" << endl;
+                }
+                for (int i = 1; i < 5; i++)
+                {
+                    if (!std::isdigit(newID[i]))
+                    {
+                        NumberOfError++;
+                        cout << "In the number part, your " << i << " number is not interger, it should be interget." << endl;
+                    }
+                }
+                if(LinkedList->checkItem(newID) == true)
+                {
+                    cout << "The ID is already there, try another." << endl;
+                    NumberOfError++;
+                }
+                if(NumberOfError > 0)
+                {
+                    NewIDloopContinue = true;
+                    cout << "Plase enter a valid ID or you can type a 'help' to help you." << endl;
+                }
+                else
+                {
+                    NewIDloopContinue = false;
+                }
             }
         }
-        if(LinkedList->checkItem(newID) == true)
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        bool NewNamecontinue = true;
+        while (NewNamecontinue == true)
         {
-            NumberOfError++;
+            cout << "Enter the item name(you can type 'help' to see what should enter): ";
+            getline(cin,newName);
+            if(newName == "help")
+            {
+                cout << "In here, you should type the name of the new item like 'putting', 'apple pie' etc and the number of character should less than 40." << endl;
+            }
+            else
+            {
+                if(newName.length() > 40)
+                {
+                    cout << "Your name's character is large than 40, it should be less, you can type a 'help' to help you." << endl;
+                    NewNamecontinue = true;
+                }
+                else
+                {
+                    NewNamecontinue = false;
+                }
+            }   
+        }
+       
+        bool Discriptioncontinue = true;
+        while (Discriptioncontinue == true)
+        { 
+            cout << "Enter the item description(you can type 'help' to see what should enter): ";
+            getline(cin,newdescription);
+            if(newdescription == "help")
+            {
+                cout << "In this situation, you should type a long description to descrip your item, like 'this is a big and delicious pie.'etc." << endl;
+            }
+            else
+            {
+                if(newdescription.length() > 255)
+                {
+                    Discriptioncontinue = true;
+                }
+                else
+                {
+                    Discriptioncontinue = false;
+                }
+            }
         }
         
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Enter the item name: ";
-        getline(cin,newName);
-        if(newName.length() > 40)
-        {
-            NumberOfError++;
-        }
-        cout << "Enter the item description: ";
-        getline(cin,newdescription);
-        if(newdescription.length() > 255)
-        {
-            NumberOfError++;
-        }
         cout << "Enter the price for the item: ";
         
         if(!(cin >> EnterPrice))
@@ -452,9 +531,10 @@ int main(int argc, char **argv)
     
     vector<Coin> coins = loadCoin("coins.dat");
     
-    
-    int option = 0;
-    while( option != 3 )
+    bool MenuContinue = true;
+    string optionInstring;
+    int option;
+    while( MenuContinue != false )
     {   
         cout << endl;
         cout << "Main Menu: " << endl;
@@ -468,60 +548,74 @@ int main(int argc, char **argv)
         cout << "\t7.Reset Stock" << endl;
         cout << "\t8.Reset Coins" << endl;
         cout << "\t9. Abort Program" << endl;
-        cout << "Select your option (1-9): ";
-        cin >> option;
+        cout << "Select your option (1-9)(you can type 'help' to see what should enter): ";
+        cin >> optionInstring;
         cout << endl;
-        if(option == 1)
+        if (optionInstring == "help")
         {
-            stockList.PrintItems();
-        }
-        else if(option == 2)
-        {
-            Option_2(&stockList , &coins);
-        }
-        else if(option == 3)
-        {
-            string filename = "stock.dat";
-            Option_3(filename, stockList);
-        }
-        else if(option == 4)
-        {
-            Option_4(&stockList);
-        }
-        else if(option == 5)
-        {
-            Option_5(&stockList);
-        }
-        else if(option == 6)
-        {
-            Option_6(coins);
-            // for (Coin item : coins)
-            // {
-            // item.Display();
-            // }
-        }
-        else if(option == 7)
-        {
-            Option_7(&stockList);
-        }
-        else if(option == 8)
-        {
-            Option_8(coins);
-        }
-        else if(option == 9)
-        {
-            cout << "bye!" << endl;
-            return EXIT_SUCCESS;
+            cout << "\tIn here, you should type a interger number 1-9 to use different funcions." << endl;
         }
         else
         {
-            std::cin.clear();
-            std::cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            std::cout << std::endl;
-            std::cout << "Please enter 1~9"<< std::endl;
-            std::cout << std::endl;
-            option = 0;
+            try
+            {
+                option = stoi(optionInstring);
+                if(option == 1)
+                {
+                    stockList.PrintItems();
+                }
+                else if(option == 2)
+                {
+                    Option_2(&stockList , &coins);
+                }
+                else if(option == 3)
+                {
+                    string filename = "stock.dat";
+                    Option_3(filename, stockList);
+                    MenuContinue = false;
+                }
+                else if(option == 4)
+                {
+                    Option_4(&stockList);
+                }
+                else if(option == 5)
+                {
+                    Option_5(&stockList);
+                }
+                else if(option == 6)
+                {
+                    Option_6(coins);
+                    // for (Coin item : coins)
+                    // {
+                    // item.Display();
+                    // }
+                }
+                else if(option == 7)
+                {
+                    Option_7(&stockList);
+                }
+                else if(option == 8)
+                {
+                    Option_8(coins);
+                }
+                else if(option == 9)
+                {
+                    cout << "bye!" << endl;
+                    MenuContinue = false;
+                }
+                else
+                {
+                    std::cout << "Please enter 1~9"<< std::endl;
+                    std::cout << std::endl;
+                    option = 0;
+                }
+            }
+            catch (const invalid_argument &ia)
+            {
+                cerr << "Please inter a interger number 1~9 or use 'help' to see what you can do here." << endl;
+            }
         }
+        
     }
     
     
