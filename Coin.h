@@ -25,7 +25,7 @@ public:
 
     void Display();
 
-    int LoadOne();
+    int LoadOne() const;
     // the denomination type
     enum Denomination denom;
     

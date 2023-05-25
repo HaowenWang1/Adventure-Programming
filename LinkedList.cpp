@@ -43,6 +43,20 @@ void LinkedList::addBack(Stock data)
     count++;
 }
 
+bool LinkedList::checkItem(string ID)
+{
+    bool HaveIt = false;
+    Node* current = head;
+    while (current != nullptr)
+    {
+        if(current->data->id == ID)
+        {
+            HaveIt = true;
+        }
+        current = current->next;
+    }
+    return HaveIt;
+}
 void LinkedList::PrintItems()
 {
     const int idWidth = 5;
@@ -61,6 +75,15 @@ void LinkedList::PrintItems()
         cout << setw(priceWidth) << left << current->data->price.dollars << "." << fixed << setprecision(2) << current->data->price.cents << endl;
 
         current = current->next;
+    }
+}
+void LinkedList::deleteLinkedList() {
+    while (head != nullptr) {
+        Node* current = head;
+        head = head->next;
+        current = nullptr;
+        delete current;
+        count--;
     }
 }
 
@@ -93,6 +116,7 @@ void LinkedList::removeItem(string ID)
         previousNode = currentNode;
         currentNode = currentNode->next;
     }
+<<<<<<< HEAD
 
     if (currentNode != nullptr) {
         
@@ -107,3 +131,39 @@ void LinkedList::removeItem(string ID)
         cout << "The item has been delete." << endl;
     }
 }
+=======
+    //in beginning
+    if (previousNode == nullptr)
+    {
+        head = head->next;
+        
+    }
+    //in middle
+    else if (currentNode != nullptr)
+    {
+        previousNode->next = currentNode->next;
+        
+    }
+    //in end
+    else{
+        currentNode = previousNode;
+        previousNode->next = nullptr;
+    }
+    currentNode = nullptr;
+    delete currentNode;
+    cout << "The item has been deleted." << endl;
+    count--;
+    // if (currentNode != nullptr) {
+    //     if (previousNode != nullptr) {
+    //         previousNode->next = currentNode->next;
+    //     } else {
+    //         head = currentNode->next;
+    //     }
+    //     delete currentNode;
+    //     count--;
+    //     cout << count <<endl;
+
+    //     cout << "The item has been deleted." << endl;
+    // }
+}
+>>>>>>> Suzhi'sBranch
