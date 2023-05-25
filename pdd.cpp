@@ -263,10 +263,11 @@ void Option_6(vector<Coin> coins)
     cout << "-------------" << endl;
     cout << "Denomination    |    Count" << endl;
     cout << "----------------------------" << endl;
-    for (Coin item : coins)
+    for (Coin item : coins){
         {
             item.Display();
         }
+    }
 }
 
 int main(int argc, char **argv)
