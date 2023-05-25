@@ -23,13 +23,10 @@ public:
 
     void removeItem(string ID);
 
-<<<<<<< HEAD
-=======
     bool checkItem(string ID);
 
     void deleteLinkedList();
 
->>>>>>> Suzhi'sBranch
     Node* GetHead() const{
     return head;
 }
